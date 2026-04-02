@@ -9,26 +9,25 @@ tags:
   - 勘误
 ---
 
+这一组文章来自对 Agent 相关主题的阶段性整理，后续又按公开阅读场景进行了统一改写。
 
-这一组文章最初来自我在学习 Agent 过程中的阶段性整理，后面又做了一轮面向公开阅读的改写。
+目前，原先散落在正文中的批注和勘误已尽量并回对应文章，而不是继续以“补充说明”的形式独立存在。原因在于：如果某个判断本身就依赖边界条件，那么更合适的做法，是把这些边界条件直接写进正文，而不是在正文之外额外附注。
 
-这次整理时，我把原先散落在正文中的批注和勘误尽量并回了对应文章里，不再单独用“补充说明”去打断正文节奏。这样做的原因很简单：如果某个判断本来就需要附带边界条件，那它更适合直接成为正文的一部分，而不是事后再贴一条醒目的批注。
+这组文章主要服务两个目标：
+- 将 Agent 相关主题整理成更稳定的知识结构
+- 让第一次接触这些概念的读者，以较低门槛进入这一方向
 
-目前这组文章主要服务两个目标：
-- 帮我自己把 Agent 相关主题整理成更稳定的知识结构
-- 让第一次接触这些概念的读者，能用比较低的阅读门槛进入这个方向
-
-因此它们的写法会明显偏向：
+因此，整组文章在写法上会明显偏向：
 - 先建立直觉
 - 再补工程视角
-- 尽量避免把术语堆得过满
+- 尽量避免术语堆叠过密
 
 在来源上，这个专题主要参考三类公开材料：
 - Berkeley 的公开课程资料，尤其是 LLM Agents 相关课程页面和讲义索引
 - Anthropic 关于 agentic systems 的官方工程文档
-- Shunyu Yao 等人的代表性论文，例如 ReAct，以及后续和 Agent 环境、软件工程任务相关的工作
+- Shunyu Yao 等人的代表性论文，例如 ReAct，以及后续与 Agent 环境、软件工程任务相关的工作
 
-如果后面我继续补充新的文章，我会尽量保持同样的标准：正文里直接说清边界，文末明确列出来源。
+后续如果继续补充新文章，也会尽量保持同样标准：正文中直接说明边界条件，文末明确列出主要来源。
 
 ## 总来源
 
@@ -37,4 +36,5 @@ tags:
 - Anthropic, *Building Effective Agents*: https://www.anthropic.com/engineering/building-effective-agents
 - Shunyu Yao et al., *ReAct: Synergizing Reasoning and Acting in Language Models*: https://arxiv.org/abs/2210.03629
 - Shunyu Yao et al., *Tree of Thoughts: Deliberate Problem Solving with Large Language Models*: https://arxiv.org/abs/2305.10601
+- Xuezhi Wang et al., *Self-Consistency Improves Chain of Thought Reasoning in Language Models*: https://arxiv.org/abs/2203.11171
 - John Yang et al., *SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering*: https://arxiv.org/abs/2405.15793
