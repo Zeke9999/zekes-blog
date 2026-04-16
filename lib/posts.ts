@@ -11,6 +11,8 @@ export interface PostData {
   title: string;
   date: string;
   category?: string;
+  series?: string;
+  tags?: string[];
   contentHtml?: string;
   excerpt?: string;
 }
@@ -23,6 +25,36 @@ function formatDate(dateValue: any): string {
     return dateValue;
   }
   return '2024-01-01';
+}
+
+function normalizeTags(tagValue: unknown): string[] {
+  if (!Array.isArray(tagValue)) return [];
+  return tagValue.filter((item): item is string => typeof item === 'string' && item.trim().length > 0);
+}
+
+function stripMarkdown(content: string): string {
+  return content
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`([^`]*)`/g, '$1')
+    .replace(/!\[.*?\]\(.*?\)/g, ' ')
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/^[-*+]\s+/gm, '')
+    .replace(/^\d+\.\s+/gm, '')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/_(.*?)_/g, '$1')
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function createExcerpt(content: string, maxLength = 120): string {
+  const plainText = stripMarkdown(content);
+  if (plainText.length <= maxLength) return plainText;
+  return `${plainText.slice(0, maxLength).trimEnd()}...`;
 }
 
 export function getSortedPostsData(): PostData[] {
@@ -40,8 +72,10 @@ export function getSortedPostsData(): PostData[] {
         slug,
         title: matterResult.data.title || slug,
         date: formatDate(matterResult.data.created || matterResult.data.date),
-        category: matterResult.data.category || 'Uncategorized',
-        excerpt: matterResult.content.substring(0, 150) + '...',
+        category: matterResult.data.category || '未分类',
+        series: matterResult.data.series,
+        tags: normalizeTags(matterResult.data.tags),
+        excerpt: createExcerpt(matterResult.content),
       };
     });
 
@@ -72,7 +106,9 @@ export async function getPostData(slug: string): Promise<PostData> {
     slug,
     title: matterResult.data.title || slug,
     date: formatDate(matterResult.data.created || matterResult.data.date),
-    category: matterResult.data.category || 'Uncategorized',
+    category: matterResult.data.category || '未分类',
+    series: matterResult.data.series,
+    tags: normalizeTags(matterResult.data.tags),
     contentHtml,
   };
 }
