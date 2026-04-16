@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="bg-white border-b border-gray-200 py-6 shadow-sm">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <Link href="/" className="text-xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-colors">
-              🚀 Zeke's Blog
+              Zeke's Blog
             </Link>
             <nav>
               <Link href="/" className="text-gray-600 hover:text-blue-600 font-medium">首页</Link>
