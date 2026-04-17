@@ -12,7 +12,7 @@ export default function Home() {
           Personal Tech Blog
         </div>
         <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-          GPA 的 AI Agent 工程笔记
+          Zeke 的 AI Agent 工程笔记
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
           聚焦 Python Agent、工具调用、RAG、评测与工程落地，记录从后端开发到智能体系统实践中的方法总结、项目拆解与问题复盘。
