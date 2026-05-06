@@ -6,92 +6,63 @@ export default function Home() {
   const focusAreas = ['Python Agent', 'Tool Calling', 'RAG', 'Evaluation', 'Multi-Agent'];
 
   return (
-    <div className="w-full space-y-10">
-      <section className="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-8 sm:py-10">
-        <div className="inline-flex rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
-          Personal Tech Blog
-        </div>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+    <div className="space-y-16">
+      {/* Hero */}
+      <section className="space-y-4">
+        <h1 className="text-3xl font-display font-bold tracking-tight text-white sm:text-4xl">
           Zeke 的 AI Agent 工程笔记
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
-          聚焦 Python Agent、工具调用、RAG、评测与工程落地，记录从后端开发到智能体系统实践中的方法总结、项目拆解与问题复盘。
+        <p className="max-w-xl text-sm leading-relaxed text-zinc-500">
+          聚焦 Python Agent、工具调用、RAG、评测与工程落地，
+          记录从后端开发到智能体系统实践中的方法总结、项目拆解与问题复盘。
         </p>
-        <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-500">
-          <span className="rounded-full bg-slate-100 px-3 py-1">哈尔滨工业大学（深圳）</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">计算机科学与技术</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">2027 届</span>
-          <span className="rounded-full bg-slate-100 px-3 py-1">求职方向：Python Agent 开发</span>
-        </div>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 pt-1">
           {focusAreas.map((area) => (
             <span
               key={area}
-              className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-sm font-medium text-slate-600"
+              className="text-xs text-zinc-600"
             >
-              {area}
+              #{area}
             </span>
           ))}
         </div>
       </section>
 
-      <section id="posts" className="space-y-6">
-        <div className="flex flex-col gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight text-slate-900">最新文章</h2>
-            <p className="mt-1 text-sm text-slate-500">按时间倒序展示近期更新，优先沉淀 Agent 工程相关专题。</p>
-          </div>
-          <div className="text-sm font-medium text-slate-500">共 {posts.length} 篇</div>
+      {/* Posts list */}
+      <section id="posts" className="space-y-0">
+        <div className="mb-6 flex items-center gap-3">
+          <span className="text-xs font-medium uppercase tracking-widest text-zinc-600">
+            最新文章
+          </span>
+          <span className="h-px flex-1 bg-zinc-800/60" />
+          <span className="text-xs text-zinc-700">{posts.length} 篇</span>
         </div>
 
-        <ul className="grid gap-6">
-          {posts.map(({ slug, title, date, category, series, tags, excerpt }) => (
-            <li key={slug} className="group">
-              <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
-                <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
-                  <time className="font-medium">{date}</time>
-                  {category && (
-                    <span className="rounded-full border border-blue-100 bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700">
-                      {category}
-                    </span>
-                  )}
-                  {series && (
-                    <span className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
-                      {series}
-                    </span>
-                  )}
-                </div>
+        {posts.length === 0 && (
+          <p className="text-sm text-zinc-600">暂无文章。</p>
+        )}
 
-                <Link href={`/posts/${slug}`} className="mt-4 block">
-                  <h3 className="text-2xl font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600">
+        <ul className="divide-y divide-zinc-800/40">
+          {posts.map(({ slug, title, date, excerpt }) => (
+            <li key={slug}>
+              <Link
+                href={`/posts/${slug}`}
+                className="group block py-5 transition-opacity hover:opacity-80"
+              >
+                <div className="flex items-baseline gap-4">
+                  <time className="shrink-0 text-xs tabular-nums text-zinc-600">
+                    {date}
+                  </time>
+                  <h2 className="text-base font-medium text-white transition-colors group-hover:text-zinc-300">
                     {title}
-                  </h3>
-                  <p className="mt-3 text-base leading-7 text-slate-600">{excerpt}</p>
-                </Link>
-
-                {tags && tags.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-500"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <div className="mt-5">
-                  <Link
-                    href={`/posts/${slug}`}
-                    className="inline-flex items-center text-sm font-semibold text-blue-600 transition-colors hover:text-blue-800"
-                  >
-                    阅读全文
-                    <span className="ml-1 transition-transform group-hover:translate-x-1">→</span>
-                  </Link>
+                  </h2>
                 </div>
-              </article>
+                {excerpt && (
+                  <p className="mt-1.5 text-sm leading-relaxed text-zinc-600 line-clamp-1">
+                    {excerpt}
+                  </p>
+                )}
+              </Link>
             </li>
           ))}
         </ul>

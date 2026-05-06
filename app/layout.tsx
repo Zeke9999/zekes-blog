@@ -1,44 +1,41 @@
 import './globals.css';
 import Link from 'next/link';
+import NavClient from './NavClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Zeke 的 AI Agent 工程笔记",
-  description: '聚焦 Python Agent、工具调用、RAG、评测与工程落地的个人技术博客。',
+  description: '聚焦 Python Agent、工具调用、RAG、评测与工程实践的个人技术博客。',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN">
-      <body className="min-h-screen bg-slate-100 text-slate-900 font-sans antialiased">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-screen bg-[#0c0c0d] text-zinc-300 antialiased">
         <div className="flex min-h-screen flex-col">
-          <header className="sticky top-0 z-20 border-b border-slate-200/80 bg-white/85 backdrop-blur">
-            <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+          <header className="sticky top-0 z-20 border-b border-zinc-800/80 bg-[#0c0c0d]/85 backdrop-blur-sm">
+            <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
               <Link href="/" className="group block">
-                <div className="text-lg font-semibold tracking-tight text-slate-900 transition-colors group-hover:text-blue-600 sm:text-xl">
+                <span className="text-base font-medium tracking-tight text-white transition-colors group-hover:text-zinc-300">
                   Zeke&apos;s Blog
-                </div>
-                <div className="mt-1 hidden text-sm text-slate-500 sm:block">
-                  AI Agent · Python · Engineering
-                </div>
+                </span>
               </Link>
-              <nav className="flex items-center gap-4 text-sm font-medium text-slate-600">
-                <Link href="/" className="transition-colors hover:text-blue-600">
-                  首页
-                </Link>
-                <Link href="/#posts" className="transition-colors hover:text-blue-600">
-                  文章
-                </Link>
-              </nav>
+              <NavClient />
             </div>
           </header>
-          <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12 sm:px-6">
             {children}
           </main>
-          <footer className="border-t border-slate-200 bg-white/90">
-            <div className="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-6 text-sm text-slate-500 sm:px-6 lg:px-8">
+          <footer className="border-t border-zinc-800/60">
+            <div className="mx-auto w-full max-w-3xl px-4 py-6 text-xs text-zinc-600 sm:px-6">
               <div>© {new Date().getFullYear()} Zeke&apos;s Blog</div>
-              <div>聚焦 Python Agent、工具调用、RAG 与工程实践，部署于 GitHub Pages。</div>
+              <div className="mt-1">聚焦 Python Agent、工具调用、RAG 与工程实践。</div>
             </div>
           </footer>
         </div>
